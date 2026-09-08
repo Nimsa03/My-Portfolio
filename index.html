@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nimsa Vithanaarachchi | Professional Portfolio</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg: #ffffff;
+            --text: #0f172a;
+            --text-light: #64748b;
+            --card-bg: #f8fafc;
+            --border: #e2e8f0;
+            --nav-bg: rgba(255, 255, 255, 0.9);
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0f172a;
+            --text: #f1f5f9;
+            --text-light: #94a3b8;
+            --card-bg: #1e293b;
+            --border: #334155;
+            --nav-bg: rgba(15, 23, 42, 0.9);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg); color: var(--text); line-height: 1.6; transition: var(--transition); scroll-behavior: smooth; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .section { padding: 80px 0; }
+
+        /* Navbar */
+        nav { position: fixed; top: 0; width: 100%; background: var(--nav-bg); backdrop-filter: blur(12px); z-index: 1000; border-bottom: 1px solid var(--border); }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text); font-weight: 600; font-size: 0.9rem; }
+        .theme-toggle { cursor: pointer; font-size: 1.3rem; color: var(--primary); }
+
+        /* Hero */
+        .hero { min-height: 100vh; display: flex; align-items: center; background: radial-gradient(circle at 90% 10%, rgba(37, 99, 235, 0.1), transparent); padding-top: 80px; }
+        .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: center; }
+        .hero-text h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 0.5rem; }
+        .hero-text h2 { font-size: 1.5rem; color: var(--primary); margin-bottom: 1.5rem; font-weight: 600; }
+        .hero-text p { font-size: 1.1rem; color: var(--text-light); margin-bottom: 2.5rem; max-width: 650px; }
+        .profile-img { width: 380px; height: 380px; border-radius: 50%; object-fit: cover; border: 8px solid var(--card-bg); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+
+        .btn-group { display: flex; gap: 1.2rem; }
+        .btn { padding: 0.9rem 2rem; border-radius: 12px; font-weight: 700; text-decoration: none; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-outline { border: 2px solid var(--primary); color: var(--primary); }
+
+        /* Technical Expertise */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .skill-card { background: var(--card-bg); padding: 2rem; border-radius: 20px; border: 1px solid var(--border); }
+        .skill-tag { display: inline-block; padding: 6px 12px; background: rgba(37, 99, 235, 0.1); color: var(--primary); border-radius: 8px; font-size: 0.8rem; font-weight: 700; margin: 4px; }
+
+        /* ISACA Journey */
+        .journey-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+        .journey-card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid var(--border); transition: 0.3s; height: 100%; display: flex; flex-direction: column; }
+        .gallery-img-box { height: 220px; overflow: hidden; }
+        .gallery-img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .gallery-img-box.multi { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+        .journey-info { padding: 1.5rem; flex-grow: 1; }
+        .journey-info h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 0.5rem; }
+
+        /* Education */
+        .edu-timeline { border-left: 2px solid var(--primary); padding-left: 2rem; }
+        .edu-item { position: relative; margin-bottom: 2rem; }
+        .edu-item::before { content: ''; position: absolute; left: -2.7rem; top: 0.5rem; width: 1rem; height: 1rem; background: var(--primary); border-radius: 50%; }
+
+        /* Projects */
+        .featured-project {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: white;
+            border-radius: 20px; /* Reduced from 30px */
+            padding: 2rem;       /* Reduced from 3rem */
+            margin-bottom: 1.5rem; /* Reduced from 2rem */
+            display: flex;
+            gap: 2rem;           /* Reduced from 3rem */
+            align-items: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* New rule to target the titles specifically */
+        .featured-project h3 {
+            font-size: 1.6rem !important; /* Reduced from 2.5rem */
+            margin: 0.5rem 0 !important;
+        }
+
+        /* Optional: Slightly shrink the description text to match */
+        .featured-project p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1rem !important;
+        }
+        
+
+        @media (max-width: 968px) {
+           .hero-grid {
+                display: flex !important;
+                flex-direction: column-reverse !important; /* This is the magic line that flips the image to the top */
+                text-align: center;
+                gap: 2rem;
+            }
+                .profile-wrapper {
+                     margin-bottom: 1rem;
+                }
+            .profile-img { width: 280px; height: 280px; margin: 0 auto; }
+            .btn-group { justify-content: center; }
+            .featured-project { flex-direction: column; }
+            .nav-links { display: none; }
+        }
+
+        /* MOBILE RESPONSIVENESS */
+        @media (max-width: 768px) {
+        /* Navbar Mobile */
+        .nav-links {
+            display: none; /* Hides links on mobile to prevent clutter */
+            position: absolute;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background: var(--nav-bg);
+            flex-direction: column;
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .nav-links.active {
+            display: flex; /* Shows links when hamburger is clicked */
+        }
+
+        .menu-toggle {
+            display: block !important; /* Shows the hamburger icon */
+        }
+
+        /* Hero Section Mobile */
+        .hero-grid {
+            grid-template-columns: 1fr !important; /* Stacks text and image */
+            text-align: center;
+            gap: 2rem;
+        }
+        
+        .hero-text h1 { font-size: 2.5rem; }
+        .profile-img { width: 260px; height: 260px; margin: 0 auto; }
+        .btn-group { justify-content: center; flex-direction: column; }
+
+        /* About Section Mobile */
+        #about .container > div {
+            grid-template-columns: 1fr !important; /* Stacks About Me and Education */
+            gap: 2rem !important;
+        }
+
+        /* Featured Project (SolveMate) Mobile */
+        .featured-project {
+            flex-direction: column !important; /* Stacks text and icon */
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* ISACA Journey Grid Mobile */
+        .journey-grid {
+            grid-template-columns: 1fr !important; /* Single column for milestones */
+        }
+    }
+/* Contact Grid Styles */
+    .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-top: 3rem;
+    }
+
+    .contact-tile {
+        background: var(--card-bg);
+        padding: 2rem;
+        border-radius: 20px;
+        border: 1px solid var(--border);
+        text-decoration: none;
+        color: var(--text);
+        transition: var(--transition);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .contact-tile:hover {
+        transform: translateY(-5px);
+        border-color: var(--primary);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .contact-tile i {
+        font-size: 2rem;
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+    }
+
+    .contact-tile span {
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
+
+    .contact-tile p {
+        font-size: 0.9rem;
+        color: var(--text-light);
+    }
+
+
+
+    .internship-badge {
+        display: inline-block;
+        padding: 10px 20px;
+        background: rgba(37, 99, 235, 0.1);
+        color: var(--primary);
+        border-radius: 50px;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+        
+    </style>
+
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-content">
+            <h2 style="font-weight: 800;">NIMSA<span style="color:var(--primary)">.V</span></h2>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#journey">ISACA Journey</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#certifications">Professional Certifications</a></li>
+                <li><a href="#contact">Contact</a></li>
+                
+            </ul>
+            <div class="theme-toggle" id="theme-toggle"><i class="fas fa-moon"></i></div>
+            <!-- Insert this inside the .nav-content div -->
+            <div class="menu-toggle" id="mobile-menu" style="display: none; cursor: pointer; font-size: 1.5rem; margin-left: 1rem;">
+              <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- .hero section -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text" data-aos="fade-right">
+                <h1>Nimsa Vithanaarachchi</h1>
+                <h2>Business Information Systems Undergraduate</h2>
+                <p>Detail-oriented aspiring Business Analyst and ERP Consultant at the University of Sri Jayewardenepura. Passionate about data-driven insights and bridging technical gaps to optimize business processes.</p>
+                <div class="btn-group">
+                    
+                    <a href="https://www.linkedin.com/in/nimsa-vithanaarachchi" target="_blank" class="btn btn-outline"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="Nimsa_Resume.pdf" download class="btn btn-primary">
+                        <i class="fas fa-file-download"></i> Download CV</a>
+                </div>
+            </div>
+            <div data-aos="zoom-in">
+                <img src="https://media.licdn.com/dms/image/v2/D5603AQEXHIVgR69WaQ/profile-displayphoto-scale_400_400/B56Z0kt39XI0Ak-/0/1774437509766?e=1788998400&v=beta&t=Ar61le5AyHmo58TfvPuKtV7dtMWE4lFsHSFxRArCtNE" class="profile-img" alt="Nimsa">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me & Education -->
+    <section id="about" class="section">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;">
+                <div data-aos="fade-up">
+                    <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">About <span style="color:var(--primary)">Me</span></h2>
+                    <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 1rem;">
+                        I am a motivated Business Information Systems undergraduate with strong analytical and problem-solving skills. My academic journey at the University of Sri Jayewardenepura has equipped me with a deep understanding of how technology integrates with business management.
+                    </p>
+                    <p style="font-size: 1.1rem; color: var(--text-light);">
+                        With a GPA of 3.93, I have excelled in modules like Business Analysis and System Analysis. I am committed to continuous learning, as evidenced by my certifications in AI, Data Analytics, and Cybersecurity.
+                    </p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Educational <span style="color:var(--primary)">Highlights</span></h2>
+                    <div class="edu-timeline">
+                        <div class="edu-item">
+                            <strong>BSc (Hons) Business Information Systems</strong>
+                            <p>University of Sri Jayewardenepura | GPA: 3.93/4.00</p>
+                        </div>
+                        <div class="edu-item">
+                            <strong>GCE Advanced Level</strong>
+                            <p>Girls' High School, Kandy | 4A passes</p>
+                        </div>
+                        <div class="edu-item">
+                            <strong>GCE Ordinary Level</strong>
+                            <p>Girls' High School, Kandy | 5A & 4B passes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Expertise -->
+    <section id="skills" class="section" style="background: var(--card-bg);">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Skill <span style="color:var(--primary)">Set</span></h2>
+            <div class="skills-grid">
+                <div class="skill-card" data-aos="fade-up">
+                    <h3>Business Analysis</h3>
+                    <div style="margin-top:1rem;">
+                        <span class="skill-tag">Requirement Gathering</span>
+                        <span class="skill-tag">System Analysis</span>
+                        <span class="skill-tag">Kanban</span>
+                        <span class="skill-tag">Stakeholder Interviews</span>
+                        <span class="skill-tag">Agile & Scrum</span>
+                    </div>
+                </div>
+                <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3>Development</h3>
+                    <div style="margin-top:1rem;">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">C#</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">HTML/CSS/JS</span>
+                    </div>
+                </div>
+                <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Data & Tools</h3>
+                    <div style="margin-top:1rem;">
+                        <span class="skill-tag">Data Analytics</span>
+                        <span class="skill-tag">Statistical Analysis</span>
+                        <span class="skill-tag">SPSS</span>
+                        <span class="skill-tag">Power BI</span>
+                        <span class="skill-tag">Rapid Miner</span>
+                        <span class="skill-tag">MS Office</span>
+                    </div>
+                </div>
+                <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3>Soft Skills</h3>
+                    <div style="margin-top:1rem;">
+                        <span class="skill-tag">Teamwork</span>
+                        <span class="skill-tag">Leadership</span>
+                        <span class="skill-tag">Communication</span>
+                        <span class="skill-tag">Problem Solving</span>
+                        <span class="skill-tag">Critical Thinking</span>
+                        <span class="skill-tag">Adaptability</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ISACA Journey -->
+    <section id="journey" class="section">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 4rem;">My <span style="color:var(--primary)">ISACA Journey</span></h2>
+            <div class="journey-grid">
+                <!-- Tile 1 -->
+                <div class="journey-card" data-aos="fade-up">
+                    <div class="gallery-img-box multi">
+                        <img src="https://media.licdn.com/dms/image/v2/D5622AQE5XTp4SPv0Lw/feedshare-image-high-res/B56Zj0JzhZHQAo-/0/1756442869982?e=1788998400&v=beta&t=7rBWrrv5UKqYapvtRHpc3SFzSfWKRKH5KXdEy5dflGQ">
+                        <img src="https://media.licdn.com/dms/image/v2/D5622AQHBIkART1qKZA/feedshare-shrink_1280/B56Zj0JzhPG4Aw-/0/1756442871785?e=1788998400&v=beta&t=lkzfqFIVUpKDMsySuRMt_D519nMSnLiZwZkHViCRpGA">
+                    </div>
+                    <div class="journey-info">
+                        <h3>Finance Crew: Fundraising</h3>
+                        <p>Being part of the organizing team for our Gingerbread Cookie Stall Fundraiser was a rewarding experience that combined teamwork, planning, and community engagement. From coordinating operations to interacting with customers, this initiative helped raise funds while bringing students together for a common cause</p>
+                    </div>
+                </div>
+                <!-- Tile 2 -->
+                <div class="journey-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="gallery-img-box">
+                        <img src="https://media.licdn.com/dms/image/v2/D5622AQGSxqUEvAi8cQ/feedshare-image-high-res/B56ZokyqXsIsAo-/0/1761553892806?e=1788998400&v=beta&t=i5ckG6ilsQFfXN_cIMf5xCMH46jch3c1FwFvUme9utc">
+                    </div>
+                    <div class="journey-info">
+                        <h3>Member Training Officer</h3>
+                        <p>I am honored to have been appointed as the Member Training & Development Officer of the ISACA Student Group of the University of Sri Jayewardenepura for the 2025/26 term at the Annual General Meeting (AGM).</p>
+                    </div>
+                </div>
+                <!-- Tile 3 -->
+                <div class="journey-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="gallery-img-box">
+                        <img src="https://media.licdn.com/dms/image/v2/D5622AQEMWic3Ahcn3g/feedshare-shrink_1280/B56Zy7zWgaHsAc-/0/1772677327165?e=1788998400&v=beta&t=P60nAvb8rmjnGevoUnsU7AftVeIpaUlmxukD5-Z92dA">
+                    </div>
+                    <div class="journey-info">
+                        <h3>Physical Awareness Sessions</h3>
+                        <p>Expanded ISACA student membership beyond our faculty for the very first time through a series of physical awareness sessions. By engaging students from different faculties, we were able to introduce the value of ISACA, create new opportunities for learning and networking, and build a more diverse student community.</p>
+                    </div>
+                </div>
+                <!-- Tile 4 -->
+                <div class="journey-card" data-aos="fade-up">
+                    <div class="gallery-img-box">
+                        <img src="https://media.licdn.com/dms/image/v2/D5622AQHzvQZWg3WuLQ/feedshare-shrink_1280/B56ZsM.7kGIkAs-/0/1765449384334?e=1788998400&v=beta&t=LIJZjLNm0R9NTXMMrYGh8BEBoqXa9CehnS-vfpyOxcc">
+                    </div>
+                    <div class="journey-info">
+                        <h3>Online Awareness Sessions</h3>
+                        <p>Through a series of online awareness sessions conducted across different faculties, we were able to introduce more students to the opportunities, knowledge, and professional network that ISACA offers.</p>
+                    </div>
+                </div>
+                <!-- Tile 5 -->
+                <div class="journey-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="gallery-img-box">
+                        <img src="https://media.licdn.com/dms/image/v2/D5622AQFSpjRBg8VDww/feedshare-image-high-res/B56Zt.w3MUHgAo-/0/1767358297886?e=1788998400&v=beta&t=cM-lQAw6p1MvH4Jwye5tDZPLSHIuVwi7tKSKq9Dsq10">
+                    </div>
+                    <div class="journey-info">
+                        <h3>Officer of the Month</h3>
+                        <p>I am honored to be recognized as Officer of the Month for my contributions as the Member Training and Development Officer. This recognition reflects the efforts invested in conducting awareness sessions, expanding membership across multiple faculties for the first time, and creating opportunities for students to learn, connect, and grow</p>
+                    </div>
+                </div>
+                <!-- Tile 6 -->
+                <div class="journey-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="gallery-img-box">
+                        <img src="https://media.licdn.com/dms/image/v2/D5622AQH1zQIQ8xNsOA/feedshare-image-high-res/B56Zt.wLMMHYAo-/0/1767358119478?e=1788998400&v=beta&t=x7ecP-zncvUybQFed51kLrLcyIMv2KMXeyRzbc86YGg">
+                    </div>
+                    <div class="journey-info">
+                        <h3>Cybersecurity in Action</h3>
+                        <p>Through the Cybersecurity in Action session, I gained valuable insights into practical cybersecurity concepts, industry practices, and emerging security challenges. I am grateful to Mr. Namodh Edirisinghe, CISSP, OSCP, for sharing his expertise and providing an engaging learning experience that strengthened my understanding of the field.
+</p>
+                    </div>
+                </div>
+                <!-- Tile 7 -->
+                <div class="journey-card" data-aos="fade-up">
+                    <div class="gallery-img-box">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D22AQGiJ9Tu_6ShGg/feedshare-image-high-res/B4DZ8EVehwKYAU-/0/1782484167099?e=1788998400&v=beta&t=-hMC6fVSh30gOv5HMcZNfQ1I--IToPVj5csVBWQzRXc">
+                    </div>
+                    <div class="journey-info">
+                        <h3>Represented ISACA at the AGM of ICBT Campus</h3>
+                        <p>Representing ISG USJ at the national Annual General Meeting at ICBT.Grateful for the experience and the meaningful conversations that contributed to my professional growth. Looking forward to applying these learnings and strengthening the ISACA community at our university.</p>
+                    </div>
+                </div>
+                <!-- Tile 8 -->
+                <div class="journey-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="gallery-img-box multi">
+                        <img src="https://media.licdn.com/dms/image/v2/D5622AQF0_I9-0i-tJg/feedshare-image-high-res/B56Z8EvMliHIAU-/0/1782490909297?e=1788998400&v=beta&t=7Hrcec2oukNkYeVWbLtSqAL1RERz4hVF_Rsvv9uxn3E">
+                        <img src="https://media.licdn.com/dms/image/v2/D5622AQH4wFPi7nYQqQ/feedshare-image-high-res/B56Z8EvMxqGcAU-/0/1782490910202?e=1788998400&v=beta&t=3qPEjTFkvaHw1eOteAu6xI6zeOx0ln0nDGK5MvoKJ20">
+                    </div>
+                    <div class="journey-info">
+                        <h3>Cyber Summit Flagship</h3>
+                        <p>Was a part of the Flagship event Cyber Summit.The summit featured three insightful sessions covering the current digital threat landscape, quantum computing and cybersecurity threats, and Security Operations Center (SOC) operations, where industry professionals shared their expertise and real-world insights. </p>
+                    </div>
+                </div>
+                <!-- Tile 9 -->
+                <div class="journey-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="gallery-img-box multi">
+                        <img src="https://media.licdn.com/dms/image/v2/D5622AQExJTjB8ekjXA/feedshare-image-high-res/B56Z.nrleZJgAU-/0/1785224648856?e=1788998400&v=beta&t=vvFG-AUb9Kk6b9e9PNqv9NdibfzpjPAOvWc0dpfkd5g">
+                        <img src="https://media.licdn.com/dms/image/v2/D5622AQFADcWjt4Fgrw/feedshare-image-high-res/B56Z.nrlImGUAU-/0/1785224647489?e=1788998400&v=beta&t=vQgfXbj6PF_MVtguNq0ZNwTSqbIVVCOftTCmGkmP09I">
+                    </div>
+                    <div class="journey-info">
+                        <h3>CSR: Govt Awareness</h3>
+                        <p>Conducting cybersecurity training sessions for Government officers.This was conducted by Mr. Asanka Suraweera and was focused on raising awareness on today's cybersecurity threats and equipping government officers with the knowledge and best practices to navigate the digital world securely.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section" style="background: var(--card-bg);">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 4rem;">My <span style="color:var(--primary)">Projects</span></h2>
+          <!-- solvemate -->
+            <div class="featured-project" data-aos="zoom-in">
+                <div style="flex: 1;">
+                    <span style="font-weight: 800; font-size: 0.8rem; text-transform: uppercase; color: var(--primary);">Business Analyst</span>
+                    <h3 style="font-size: 2.5rem; margin: 1rem 0;">SolveMate - Solvent Filter & Catalog Browser</h3>
+                    <p style="opacity: 0.9; margin-bottom: 1.5rem;">Served as the Business Analyst for SolveMate, a polymer–solvent compatibility management system developed using Hansen Solubility Parameters. Responsible for gathering and documenting requirements, facilitating communication between stakeholders and the development team, and maintaining the project Kanban board to track tasks, progress, and project deliverables. Contributed to project planning, requirement analysis, and ensuring the team remained aligned with project objectives throughout the development lifecycle.</p>
+                    <div style="display:flex; gap:10px;">
+                        <span class="skill-tag" style="background:rgba(255,255,255,0.1); color:white;">Agile - Clickup</span>
+                        <span class="skill-tag" style="background:rgba(255,255,255,0.1); color:white;">Requirement Elicitation</span>
+                    </div>
+                    <a href="https://github.com/Department-of-IT-FMSC-USJ/oop-project-final-solvemate.git" target="_blank" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem; margin-top: 1.5rem; border-color: rgba(255,255,255,0.3); color: white;">
+                        <i class="fab fa-github"></i> View Project</a>
+                </div>
+            
+            </div>
+            <!-- medflex -->
+            <div class="featured-project" data-aos="zoom-in">
+                <div style="flex: 1;">
+                    <span style="font-weight: 800; font-size: 0.8rem; text-transform: uppercase; color: var(--primary);">Web Development Project</span>
+                    <h3 style="font-size: 2.5rem; margin: 1rem 0;">MEDFLEX AI - Assisted Reflex Blood Test Prediction System</h3>
+                    <p style="opacity: 0.9; margin-bottom: 1.5rem;">Developed a web-based system using HTML, Tailwind CSS, JavaScript, and MySQL to predict abnormal on-demand blood test
+needs from routine markers. The system helps lab staff preemptively order tests, reducing patient wait times and costs. Applied
+skills in web development, database management, and AI integration for healthcare process improvement.</p>
+                    <div style="display:flex; gap:10px;">
+                        <span class="skill-tag" style="background:rgba(255,255,255,0.1); color:white;">HTML/CSS/JS</span>
+                        <span class="skill-tag" style="background:rgba(255,255,255,0.1); color:white;">Database Design</span>
+                    </div>
+                    <a href="https://github.com/LEOQuester/MedFlex-Latest" target="_blank" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem; margin-top: 1.5rem; border-color: rgba(255,255,255,0.3); color: white;">
+                        <i class="fab fa-github"></i> View Project</a>
+                </div>
+            </div>
+            <!-- careerPulse -->
+            <div class="featured-project" data-aos="zoom-in">
+                <div style="flex: 1;">
+                    <span style="font-weight: 800; font-size: 0.8rem; text-transform: uppercase; color: var(--primary);">Mini UI/UX Project</span>
+                    <h3 style="font-size: 2.5rem; margin: 1rem 0;">CareerPulse-Centralized Job Application & Career Tracker</h3>
+                    <p style="opacity: 0.9; margin-bottom: 1.5rem;">Designed and prototyped a user-centered UI/UX solution to help young adults manage job applications, CV versions, interview
+schedules, and application deadlines in one platform. Conducted user interviews and applied the Design Thinking process to
+identify pain points related to job tracking and career organization. Developed intuitive interfaces and workflows that improve
+application management, reduce missed opportunities, and create a more organized job-seeking experience.</p>
+                    <div style="display:flex; gap:10px;">
+                        <span class="skill-tag" style="background:rgba(255,255,255,0.1); color:white;">User Research & Requirements Gathering</span>
+                        <span class="skill-tag" style="background:rgba(255,255,255,0.1); color:white;">Design Thinking & Problem Solving</span>
+                    </div>
+                    <a href="https://www.figma.com/proto/enkWcfcl9zWn814QruDpN7/CareerPulse?t=e9OrsfPifTaLOrJ6-1" target="_blank" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem; margin-top: 1.5rem; border-color: rgba(255,255,255,0.3); color: white;">
+                        <i class="fab fa-figma"></i> View Project</a>
+                </div>
+            </div>
+            <!-- statistical calculator -->
+            <div class="featured-project" data-aos="zoom-in">
+                <div style="flex: 1;">
+                    <span style="font-weight: 800; font-size: 0.8rem; text-transform: uppercase; color: var(--primary);">Mini Project</span>
+                    <h3 style="font-size: 2.5rem; margin: 1rem 0;">Statistical Analysis Calculator Development</h3>
+                    <p style="opacity: 0.9; margin-bottom: 1.5rem;">Developed a Python program to solve key statistical equations including measures of central tendency, variability, and
+probability distributions. Enabled efficient and accurate data analysis for students and researchers. Applied Python
+programming, statistical concepts, and teamwork to deliver a practical analytical tool.
+</p>
+                    <div style="display:flex; gap:10px;">
+                        <span class="skill-tag" style="background:rgba(255,255,255,0.1); color:white;">Python Development</span>
+                        <span class="skill-tag" style="background:rgba(255,255,255,0.1); color:white;">Analytical Problem Solving</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section id="certifications" class="section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Professional <span style="color:var(--primary)">Certifications</span></h2>
+            <div class="skills-grid">
+                <div class="project-card" style="padding:1.5rem; display:flex; align-items:center; gap:15px;">
+                    <i class="fas fa-certificate" style="color:var(--primary)"></i>
+                    <p>IoT & Digital Transformation (Cisco)</p>
+                    <a href="https://www.linkedin.com/posts/nimsa-vithanaarachchi_cisconetworkingacademy-iot-digitaltransformation-activity-7425785487908347904-FQXp?utm_source=share&utm_medium=member_desktop&rcm=ACoAADbfWIAB5HZOl66fYh2_FFpTZYgfQat0Ap4" target="_blank" style="margin-left: auto; background: rgba(37, 99, 235, 0.1); color: var(--primary); padding: 8px 12px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: 5px;">
+                        <i class="fas fa-eye"></i> </a>
+                </div>
+                <div class="project-card" style="padding:1.5rem; display:flex; align-items:center; gap:15px;">
+                    <i class="fas fa-certificate" style="color:var(--primary)"></i>
+                    <p>Cybersecurity Fundamentals (APNIC)</p>
+                    <a href="https://www.linkedin.com/posts/nimsa-vithanaarachchi_cybersecurity-apnicacademy-activity-7422918988558569472-7JzF?utm_source=share&utm_medium=member_desktop&rcm=ACoAADbfWIAB5HZOl66fYh2_FFpTZYgfQat0Ap4" target="_blank" style="margin-left: auto; background: rgba(37, 99, 235, 0.1); color: var(--primary); padding: 8px 12px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: 5px;">
+                        <i class="fas fa-eye"></i></a>
+                </div>
+                <div class="project-card" style="padding:1.5rem; display:flex; align-items:center; gap:15px;">
+                    <i class="fas fa-certificate" style="color:var(--primary)"></i>
+                    <p>PM Foundations: Requirements (LinkedIn)</p>
+                    <a href="https://www.linkedin.com/posts/nimsa-vithanaarachchi_certificate-of-completion-activity-7381732665621737472-BTWK?utm_source=share&utm_medium=member_desktop&rcm=ACoAADbfWIAB5HZOl66fYh2_FFpTZYgfQat0Ap4" target="_blank" style="margin-left: auto; background: rgba(37, 99, 235, 0.1); color: var(--primary); padding: 8px 12px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: 5px;">
+                        <i class="fas fa-eye"></i></a>
+                </div>
+                <div class="project-card" style="padding:1.5rem; display:flex; align-items:center; gap:15px;">
+                    <i class="fas fa-certificate" style="color:var(--primary)"></i>
+                    <p>What is Generative AI? (LinkedIn)</p>
+                    <a href="https://www.linkedin.com/posts/nimsa-vithanaarachchi_certificate-of-completion-activity-7369661497217609728-iQSu?utm_source=share&utm_medium=member_desktop&rcm=ACoAADbfWIAB5HZOl66fYh2_FFpTZYgfQat0Ap4" target="_blank" style="margin-left: auto; background: rgba(37, 99, 235, 0.1); color: var(--primary); padding: 8px 12px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: 5px;">
+                        <i class="fas fa-eye"></i></a>
+                </div>
+                <div class="project-card" style="padding:1.5rem; display:flex; align-items:center; gap:15px;">
+                    <i class="fas fa-certificate" style="color:var(--primary)"></i>
+                    <p>Learning Data Analytics-1 Foundations (LinkedIn)</p>
+                    <a href="https://www.linkedin.com/posts/nimsa-vithanaarachchi_certificate-of-completion-activity-7367227289144602624-Cp6B?utm_source=share&utm_medium=member_desktop&rcm=ACoAADbfWIAB5HZOl66fYh2_FFpTZYgfQat0Ap4" target="_blank" style="margin-left: auto; background: rgba(37, 99, 235, 0.1); color: var(--primary); padding: 8px 12px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: 5px;">
+                        <i class="fas fa-eye"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+<footer id="contact" style="padding: 100px 0; background: var(--bg); border-top: 1px solid var(--border);">
+    <div class="container">
+        <div style="text-align: center; max-width: 700px; margin: 0 auto 4rem auto;">
+            <div class="internship-badge" data-aos="fade-up">Available for Internships</div>
+            <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;" data-aos="fade-up">Contact <span style="color:var(--primary)">Me</span></h2>
+            <p style="color: var(--text-light); font-size: 1.1rem;" data-aos="fade-up">
+                I am currently seeking internship opportunities where I can apply my skills, gain industry experience, and contribute to meaningful technology-driven solutions.</p>
+        </div>
+
+        <div class="contact-grid">
+            <!-- Email Tile -->
+            <a href="mailto:ayodyanimsa03@gmail.com" class="contact-tile" data-aos="fade-up">
+                <i class="fas fa-envelope"></i>
+                <span>Email Me</span>
+                <p>ayodyanimsa03@gmail.com</p>
+            </a>
+
+            <!-- Phone Tile -->
+            <a href="tel:0742218212" class="contact-tile" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-phone"></i>
+                <span>Call Me/ Whatsapp</span>
+                <p>+94 74 221 8212</p>
+            </a>
+
+            <!-- LinkedIn Tile -->
+            <a href="https://www.linkedin.com/in/nimsa-vithanaarachchi" target="_blank" class="contact-tile" data-aos="fade-up" data-aos-delay="200">
+                <i class="fab fa-linkedin"></i>
+                <span>LinkedIn</span>
+                <p>Nimsa Vithanaarachchi</p>
+            </a>
+
+            <!-- GitHub Tile -->
+            <a href="https://github.com/Nimsa03" target="_blank" class="contact-tile" data-aos="fade-up" data-aos-delay="300">
+                <i class="fab fa-github"></i>
+                <span>GitHub</span>
+                <p>Nimsa03</p>
+            </a>
+        </div>
+
+        <div style="margin-top: 5rem; text-align: center; border-top: 1px solid var(--border); padding-top: 2rem;">
+            <p style="font-size: 0.8rem; opacity: 0.6;">&copy; 2026 Nimsa Vithanaarachchi. Built with Passion & Precision. All Rights Reserved</p>
+        </div>
+    </div>
+</footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // Dark Mode
+        const themeToggle = document.getElementById('theme-toggle');
+        const icon = themeToggle.querySelector('i');
+
+        themeToggle.addEventListener('click', () => {
+            if (document.body.getAttribute('data-theme') === 'dark') {
+                document.body.removeAttribute('data-theme');
+                icon.className = 'fas fa-moon';
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                icon.className = 'fas fa-sun';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Initialize theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+            icon.className = 'fas fa-sun';
+        }
+        // Mobile Menu Toggle Logic
+const mobileMenu = document.getElementById('mobile-menu');
+const navLinks = document.querySelector('.nav-links');
+
+mobileMenu.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    // Switch between bars and X icon
+    const icon = mobileMenu.querySelector('i');
+    icon.classList.toggle('fa-bars');
+    icon.classList.toggle('fa-times');
+});
+
+// Close menu when a link is clicked
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        mobileMenu.querySelector('i').classList.add('fa-bars');
+        mobileMenu.querySelector('i').classList.remove('fa-times');
+    });
+});
+    </script>
+</body>
+</html>
